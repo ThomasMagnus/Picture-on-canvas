@@ -839,6 +839,8 @@ h4 {
 }
 .feedback-slider-item {
   padding-bottom: 5rem;
+  width: 1140px;
+  flex: 1 0 1140px;
 }
 .feedback-block {
   position: relative;
@@ -1258,6 +1260,11 @@ h4 {
   transform: translateX(-50%) !important;
   padding: 3rem 6rem 4rem 6rem;
 }
+
+.slider__wrapper {
+  display: flex;
+}
+
 @media (max-width: 1399px) {
   .paints {
     display: none;
@@ -1281,6 +1288,7 @@ h4 {
     width: 100%;
   }
 }
+
 @media (max-width: 1199px) {
   .fixed-gift {
     display: none;

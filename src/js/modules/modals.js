@@ -78,7 +78,7 @@ const modals = () => {
 			}, time)
 		}
 	
-		timeOutModal('.popup-consultation', 60000)
+		// timeOutModal('.popup-consultation', 60000)
 	}
 
 	const getModalOnScroll = () => {

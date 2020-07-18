@@ -931,11 +931,17 @@ module.exports = g;
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_modals__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/modals */ "./src/js/modules/modals.js");
+/* harmony import */ var _modules_slider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/slider */ "./src/js/modules/slider.js");
+/* harmony import */ var _modules_showContent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/showContent */ "./src/js/modules/showContent.js");
+
+
 
 window.addEventListener('DOMContentLoaded', function () {
   'use strict';
 
   Object(_modules_modals__WEBPACK_IMPORTED_MODULE_0__["default"])();
+  Object(_modules_slider__WEBPACK_IMPORTED_MODULE_1__["default"])();
+  Object(_modules_showContent__WEBPACK_IMPORTED_MODULE_2__["default"])();
 });
 
 /***/ }),
@@ -1020,9 +1026,8 @@ var modals = function modals() {
           document.body.style.marginRight = "".concat(scrollWidth, "px");
         }
       }, time);
-    };
+    }; // timeOutModal('.popup-consultation', 60000)
 
-    timeOutModal('.popup-consultation', 60000);
   };
 
   var getModalOnScroll = function getModalOnScroll() {
@@ -1042,6 +1047,129 @@ var modals = function modals() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (modals);
+
+/***/ }),
+
+/***/ "./src/js/modules/showContent.js":
+/*!***************************************!*\
+  !*** ./src/js/modules/showContent.js ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var showContent = function showContent() {
+  var buttonStyles = document.querySelector('.button-styles'),
+      hiddenLg = document.querySelectorAll('.hidden-lg');
+
+  var getContent = function getContent() {
+    hiddenLg.forEach(function (item) {
+      item.classList.remove('hidden-lg');
+    });
+  };
+
+  buttonStyles.addEventListener('click', function () {
+    this.remove();
+    getContent();
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (showContent);
+
+/***/ }),
+
+/***/ "./src/js/modules/slider.js":
+/*!**********************************!*\
+  !*** ./src/js/modules/slider.js ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var slider = function slider() {
+  var mainSlider = document.querySelector('.main-slider'),
+      mainSliderItem = document.querySelectorAll('.main-slider-item');
+  var heightImg;
+  var count = 1;
+  var offset = 0;
+  mainSliderItem.forEach(function (item) {
+    heightImg = parseFloat(getComputedStyle(item).height);
+  });
+  mainSlider.style.cssText = "\n\t\theight: ".concat(heightImg, "px;\n\t\toverflow: hidden;\n\t");
+
+  var showSlider = function showSlider() {
+    count < mainSliderItem.length ? offset += -heightImg : (offset = 0, count = 0);
+    mainSliderItem.forEach(function (item) {
+      item.style.cssText = "\n\t\t\t\ttransform: translateY(".concat(offset, "px);\n\t\t\t\ttransition: all 0.5s linear;\n\t\t\t");
+    });
+    count++;
+  };
+
+  setInterval(function () {
+    showSlider();
+  }, 4500); //////////////////////////////////////////////////////////////////////////////////
+
+  var sliderWrapper = document.querySelector('.slider__wrapper'),
+      feedbackSlideritem = document.querySelectorAll('.feedback-slider-item'),
+      mainPrevBtn = document.querySelector('.main-prev-btn'),
+      mainNextBtn = document.querySelector('.main-next-btn');
+  var widthImg;
+  var counter = 1;
+  var offsetWidth = 0;
+  feedbackSlideritem.forEach(function (item) {
+    widthImg = parseFloat(getComputedStyle(item).width);
+  });
+
+  var showSlides = function showSlides() {
+    feedbackSlideritem.forEach(function (item) {
+      item.style.cssText = "\n\t\t\t\ttransform: translateX(".concat(offsetWidth, "px);\n\t\t\t\ttransition: all 0.5s linear;\n\t\t\t");
+    });
+  };
+
+  sliderWrapper.style.cssText = "\n\t\twidth: ".concat(widthImg, "px;\n\t\toverflow: hidden;\n\t");
+
+  var nextSlide = function nextSlide() {
+    counter < feedbackSlideritem.length ? offsetWidth += -widthImg : (offsetWidth = 0, counter = 0);
+    showSlides();
+    counter++;
+  };
+
+  var prevSlide = function prevSlide() {
+    counter > 1 ? offsetWidth += widthImg : (offsetWidth = (feedbackSlideritem.length - 1) * -widthImg, counter = feedbackSlideritem.length + 1);
+    showSlides();
+    counter--;
+  };
+
+  mainNextBtn.addEventListener('click', nextSlide);
+  mainPrevBtn.addEventListener('click', prevSlide);
+  var interval;
+
+  function slideInterval() {
+    interval = setInterval(nextSlide, 4500);
+  }
+
+  slideInterval();
+  feedbackSlideritem.forEach(function (element) {
+    element.addEventListener('mouseenter', function () {
+      clearInterval(interval);
+    });
+    element.addEventListener('mouseleave', function () {
+      slideInterval();
+    });
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (slider);
 
 /***/ })
 
