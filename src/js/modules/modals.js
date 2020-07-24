@@ -53,7 +53,7 @@ const modals = () => {
 		modal.addEventListener('click', (e) => {
 			const target = e.target;
 	
-			if (target.tagName === 'BUTTON' || target.classList.contains(closeBtn)) {
+			if (target.classList.contains('popup-close') || target.classList.contains(closeBtn)) {
 				hideModal()
 			}
 		})
