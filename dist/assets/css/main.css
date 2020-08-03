@@ -195,6 +195,13 @@ h4 {
   margin: 0;
   width: 20rem;
 }
+.active-burger {
+  display: block !important;
+}
+.active-hint {
+  color: #a12ab1;
+  border: none !important;
+}
 .header .burger-menu li {
   padding: 2rem;
 }
@@ -204,6 +211,19 @@ h4 {
 .header .burger-menu li a {
   color: inherit;
   text-decoration: none;
+}
+.pageup {
+  opacity: 0;
+	width: 26px ;
+	height: 26px;
+	position: fixed;
+	bottom: 100px;
+	right: 5%;
+	z-index: 30;
+	background-color: #fff;
+	cursor: pointer;
+	border: 1px solid white;
+  transition: 1s all;
 }
 .main {
   background-color: #f7e7e6;
@@ -631,6 +651,13 @@ h4 {
   padding: 1rem 2rem;
   cursor: pointer;
 }
+.active-content {
+  display: none;
+}
+.active-hint {
+  color: red;
+  border: none;
+}
 .portfolio ul .active {
   border: 1px solid #c51abb;
   color: #c51abb;
@@ -639,6 +666,7 @@ h4 {
 .portfolio-wrapper {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 .portfolio-block {
   width: 20%;
@@ -796,6 +824,9 @@ h4 {
 .scheme-block p {
   margin-top: 2rem;
   font-size: 1.7rem;
+  text-align: center;
+}
+.status {
   text-align: center;
 }
 .card-2 {

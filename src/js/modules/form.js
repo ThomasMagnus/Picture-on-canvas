@@ -64,6 +64,11 @@ forms.forEach(item => {
 
 		const formData = new FormData(item);
 
+		if (item.closest('.calc-form ')) {
+			formData.append('calcPrice', document.querySelector('.calc-price').value);
+			console.log('true');
+		}
+
 		postData(formData, API)
 			.then(data => {
 				console.log(data);
@@ -84,6 +89,9 @@ forms.forEach(item => {
 				}, 3000)
 				if (item.closest('.popup-design') || item.closest('.calc-form')) {
 					file.textContent = 'Файл не выбран';
+				}
+				if (item.closest('.calc-form ')) {
+					document.querySelector('.calc-price').textContent = 'Для расчета нужно выбрать размер картины и материал картины'
 				}
 			})
 	})
